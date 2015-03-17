@@ -1,5 +1,5 @@
 <?php
-//CLASE PARA CONEXION EN PRUEBA
+//CLASE PARA CONEXION
  class Conexion extends PDO { 
    private $tipo_de_base = 'mysql';
    private $host = 'localhost';
@@ -23,7 +23,6 @@
             $query = "SELECT count(*) FROM ".$tabla;
             if($param1!='' || $param2!='' || $param3!='' || $param4!='' || $param5!=''){
               $query.=" WHERE ";
-              #echo $query;
             }
             if ($param1!='') {
               $query.= $param1;
@@ -33,63 +32,20 @@
             }
             if($param3!=''){
               $query.= " AND ". $param3;
-              #echo $query;
             }
             if($param4!=''){
               $query.= " AND ". $param4;
-              #echo $query;
             }
             if($param5!=''){
               $query.= " AND ". $param5;
-              #echo $query;
             }
             echo $query;  
             $result = PDO::prepare($query);
             $result->execute();
             return $result->fetchColumn();
-
-
-
-
-          /*if($param1){
-            $query = "SELECT count(*) FROM " .$tabla. " WHERE ".$param1;
-            echo $query;
-            $result = PDO::prepare($query);
-            $result->execute();
-            return $result->fetchColumn();
-          }elseif($param1 && $param2){
-            $query = "SELECT count(*) FROM " .$tabla. " WHERE ".$param1 ." AND ". $param2;
-            echo $query;
-            $result = PDO::prepare($query);
-            $result->execute();
-            return $result->fetchColumn();
-          }elseif($param1 && $param2 && $param3){
-            $query = "SELECT count(*) FROM " .$tabla. " WHERE ". $param1." AND ".$param2. " AND ".$param3;
-            echo $query;
-            $result = PDO::prepare($query);
-            $result->execute();
-            return $result->fetchColumn();
-          }elseif($param1 && $param2 && $param3 && $param4){
-            $query = "SELECT count(*) FROM " .$tabla. " WHERE :param1 AND :param2 AND :param3 AND :param4 ";
-            $result = PDO::prepare($query);
-            $result->execute(array(':param1'=>$param1,':param2'=>$param2,':param3'=>$param3,':param4'=>$param4));
-            return $result->fetchColumn();
-          }elseif($param1 && $param2 && $param3 && $param4 && $param5){
-            $query = "SELECT count(*) FROM " .$tabla. " WHERE :param1 AND :param2 AND :param3 AND :param4 AND :param5 ";
-            $result = PDO::prepare($query);
-            $result->execute(array(':param1'=>$param1,':param2'=>$param2,':param3'=>$param3,':param4'=>$param4,':param5'=>$param5));
-            return $result->fetchColumn();
-          }else{
-            $query = "SELECT count(*) FROM ".$tabla;
-            $result = PDO::prepare($query);
-            $result->execute();
-            return $result->fetchColumn();
-          }*/
-
         } catch (PDOException $e) {
            echo "Error" . $e->getMessage();     
         }      
-
     }
 
  } 
